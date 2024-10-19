@@ -3,7 +3,7 @@ const passport = require("passport");
 
 
 router.use('/' , require('./swagger'))
-router.use("/users", require("./users"));
+router.use("/members", require("./members"));
 router.get('/', (req,res)=>{
   
     res.send('hello word')
