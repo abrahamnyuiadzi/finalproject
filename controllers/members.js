@@ -40,6 +40,45 @@ const createUser =async (req,res)=>{
 
 };
 
+const updateUser =async (req,res)=>{
+    //swagger.tags=['users']
+
+ const userId = new ObjectId(req.params.id);
+ const user ={
+     firstName:req.body.firstName,
+     lastName:req.body.lastName,
+     email:req.body.email,
+    
+ };
+ const reponse =await mongodb.getDatabase().db().collection('user').replaceOne({ _id :userId},user);
+if(reponse.modifiedCount>0){
+ res.status(204).send();
+}else{
+ res.status(500).json(reponse.error||'some error occured while updating the user ');
+ 
+}
+
+};
+
+const deleteUser =async (req,res)=>{
+    //swagger.tags=['users']
+ const userId = new ObjectId(req.params.id);
+ const user ={
+     firstName:req.body.firstName,
+     lastName:req.body.lastName,
+     email:req.body.email,
+    
+ };
+ const reponse =await mongodb.getDatabase().db().collection('user').deleteOne({ _id :userId});
+if(reponse.deletedCount>0){
+ res.status(204).send();
+}else{
+ res.status(500).json(reponse.error||'some error occured while updating the user ');
+ 
+}
+
+};
+
 
 
 
@@ -50,6 +89,8 @@ module.exports={
     getAll,
     getSingle,
     createUser,
+    deleteUser,
+    updateUser
    
  
 }

@@ -12,3 +12,7 @@ router.get('/',  memberController.getAll);
 router.get('/:id',memberController.getSingle);
 
 router.post('/',  isAuthenticated,memberController.createUser);
+
+router.put('/:id',isAuthenticated,memberController.updateUser);
+
+router.delete('/:id',isAuthenticated,memberController.deleteUser);
