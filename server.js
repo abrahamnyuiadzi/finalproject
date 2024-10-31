@@ -6,6 +6,7 @@ const passport =require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
+const validate =require('express-validator')
 
 
 const port = process.env.PORT || 3000;
@@ -68,6 +69,10 @@ app.get('/github/callback',passport.authenticate('github',{
  (req,res)=>{
 req.session.user =req.user;
 res.redirect('/');
+ });
+
+ process.on('uncaughtException', (err,origin ) =>{
+    console.log(process.stderr.fd,`caught exception :${err}\n `+ `Exception origin :${origin}` );
  });
 
 mongodb.initDb((err)=>{
